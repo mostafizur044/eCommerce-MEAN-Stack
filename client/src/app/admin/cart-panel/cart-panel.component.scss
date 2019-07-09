@@ -1,0 +1,82 @@
+.title {
+  margin: 0;
+  padding: 15px 10px;
+  background: #ffffff;
+  color: #4169e1;
+  border-radius: 2px;
+  border-bottom: 1px solid #efefef;
+  button {
+    float: right;
+    font-size: 12px;
+    padding: 5px;
+    border: 1px solid #4169e1;
+    border-radius: 5px;
+    color: #4169e1;
+  }
+}
+
+.cart-container {
+  max-height: 400px;
+  overflow: auto;
+  .cart-item {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #efefef;
+    .image {
+      flex: 1 1 30%;
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .info {
+      flex: 1 1 65%;
+      h5,
+      p {
+        margin: 0;
+        padding: 0 3px;
+      }
+      p {
+        font-size: 12px;
+      }
+
+      .btn-cart-action {
+        padding: 5px 3px;
+        span {
+          display: inline-block;
+          text-align: center;
+        }
+        span.qty {
+          width: 50px;
+          font-size: 12px;
+        }
+        span.btn-cart-inc-dec {
+          border: 1px solid #efefef;
+          font-size: 16px;
+          width: 20px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .delete {
+      flex: 1 1 5%;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  }
+}
+
+.total-amount-section {
+  margin: 0;
+  padding: 15px 10px;
+  background: #ffffff;
+  color: #4169e1;
+  border-radius: 2px;
+  border-top: 1px solid #efefef;
+  font-weight: 600;
+}

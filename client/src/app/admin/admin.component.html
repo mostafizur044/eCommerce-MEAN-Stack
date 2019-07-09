@@ -1,3 +1,23 @@
-Main
-<app-cart-panel></app-cart-panel>
-<router-outlet></router-outlet>
+<header class="header">
+  <nav class="navbar">
+    <div class="logo">
+      <img
+        src="https://spreecommerce.org/wp-content/uploads/2019/02/spree-logo@2x.png"
+        alt="logo"
+      />
+    </div>
+    <div class="cart-image">
+      <img
+        src="https://www.iconbunny.com/icons/media/catalog/product/1/0/1087.9-shopping-bag-icon-iconbunny.jpg"
+        alt="cart_icon"
+      />
+      <div class="counter">2</div>
+      <div class="show-cart-items display-none">
+        <app-cart-panel></app-cart-panel>
+      </div>
+    </div>
+  </nav>
+</header>
+<main class="wrapper">
+  <router-outlet></router-outlet>
+</main>

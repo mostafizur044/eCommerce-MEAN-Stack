@@ -1,1 +1,325 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+$font-family: monospace;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  line-height: 1.7;
+  color: #333333;
+  -webkit-font-smoothing: antialiased;
+}
+
+.header {
+  .navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #fefefe;
+    height: 60px;
+    padding: 5px 30px;
+    z-index: 999;
+
+    -webkit-box-shadow: 0px 3px 10px 0px rgba(135, 133, 135, 1);
+    -moz-box-shadow: 0px 3px 10px 0px rgba(135, 133, 135, 1);
+    box-shadow: 0px 3px 10px 0px rgba(135, 133, 135, 1);
+
+    .logo {
+      flex: 1;
+      padding-left: 65px;
+      img {
+        width: 100px;
+        height: 40px;
+        object-fit: contain;
+      }
+    }
+
+    .cart-image {
+      flex: 1;
+      position: relative;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      text-align: right;
+      cursor: pointer;
+      img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .counter {
+        position: absolute;
+        top: 0;
+        right: -8px;
+        padding: 0 7px;
+        background-color: #ffffff;
+        color: #4169e1;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 30px;
+        text-align: center;
+        -webkit-box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+        -moz-box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+        box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+      }
+
+      .show-cart-items {
+        position: absolute;
+        top: 56px;
+        right: 0;
+        width: 320px;
+        background: #ffffff;
+        -webkit-box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+        -moz-box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+        box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+        border-radius: 2px;
+        z-index: 9999;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.disable {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.display-none {
+  display: none!important;
+}
+
+.display-block {
+  display: block!important;
+}
+
+.display-flex {
+  display: flex!important;
+}
+
+button {
+  border: none;
+  outline: 0;
+  color: #ffffff;
+  background-color: transparent;
+  text-align: center;
+  cursor: pointer;
+}
+
+.wrapper {
+  width: 90%;
+  padding: 20px;
+  margin: auto;
+
+  .product-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: wrap;
+    margin-top: 60px;
+    padding: 30px;
+  }
+
+  .product-list .card {
+    -webkit-box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+    -moz-box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+    box-shadow: 0px 1px 10px 0px rgba(135, 133, 135, 1);
+    max-width: 300px;
+    margin: 10px;
+    font-family: arial;
+  }
+
+  .card .product-image {
+    width: 300px;
+    height: 220px;
+    padding: 10px;
+
+    position: relative;
+    .black-cover {
+      position: absolute;
+      width: 300px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(201, 200, 201, 0.5);
+      display: none;
+
+      .details-btn {
+        padding: 10px 20px;
+        background-color: #4169e1;
+        color: #ffffff;
+        font-size: 14px;
+        border-radius: 30px;
+      }
+    }
+
+    &:hover .black-cover {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .card .product-image img {
+    width: 280px;
+    height: 200px;
+    object-fit: contain;
+  }
+
+  .card .product-info {
+    padding: 10px 15px;
+    display: flex;
+  }
+
+  .card .product-info .title {
+    margin: 0;
+    flex: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card .product-info .price {
+    margin: 0;
+    flex: 1;
+    color: grey;
+    text-align: right;
+  }
+
+  .card .description {
+    margin: 0;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .card .product-qty {
+    margin: 0;
+    padding: 0 15px;
+  }
+
+  .card .add-cart-action {
+    padding-top: 10px;
+
+    .add-cart-btn {
+      border: none;
+      outline: 0;
+      padding: 12px;
+      color: white;
+      background-color: #4169e1;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .btn-cart-action {
+      background-color: #4169e1;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+
+      span {
+        display: block;
+        text-align: center;
+        padding: 6px;
+      }
+      span.qty {
+        flex: 1 1 60%;
+        font-size: 14px;
+        border-right: 1px solid #efefef;
+        border-left: 1px solid #efefef;
+      }
+      span.btn-inc-dec {
+        font-size: 14px;
+        flex: 1 1 40%;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    .modal-content {
+      background-color: #ffffff;
+      margin: 10% auto;
+      padding: 20px;
+      width: 80%;
+      min-height: 20%;
+      border-radius: 5px;
+      overflow: hidden;
+
+      .modal-head {
+        position: relative;
+        .modal-close {
+          position: absolute;
+          top: -30px;
+          right: -10px;
+          color: #4169e1;
+          font-size: 35px;
+          font-weight: bold;
+  
+          &:hover,
+          &:focus {
+            text-decoration: none;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .modal-body {
+        max-height: 500px;
+        overflow: auto;
+        .detail-container {
+          display: flex;
+          flex-flow: wrap;
+          justify-content: center;
+          .d-image {
+            flex: 1;
+            padding: 15px;
+            .d-img {
+              max-height: 250px;
+              object-fit: contain;
+            }
+          }
+
+          .details {
+            flex: 1;
+            padding: 15px;
+            padding-top: 30px;
+
+            h3, h4 {
+              margin: 0;
+            }
+
+            .description {
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+  
+    }
+  }
+}
