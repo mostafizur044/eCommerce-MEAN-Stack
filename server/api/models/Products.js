@@ -27,7 +27,11 @@ const productsSchema = new Schema({
         type: Number,
         required: [true, 'Price cannot be blank.'],
     },
-    description: {
+    Qunatity: {
+        type: Number,
+        required: [true, 'Qunatity cannot be blank.'],
+    },
+    Description: {
         type: String,
         trim: String,
         maxlength: [250, 'Must be less than 50 characters.']

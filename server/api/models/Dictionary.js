@@ -22,7 +22,7 @@ const dictionarySchema = new Schema({
         type: String,
         trim: String,
         required: [true, 'ShortCode cannot be blank.'],
-        minlength: [3, 'Must be at least 3 characters.'],
+        minlength: [2, 'Must be at least 3 characters.'],
         maxlength: [10, 'Must be less than 10 characters.']
     },
     createdAt: {type: Date, default: Date.now},

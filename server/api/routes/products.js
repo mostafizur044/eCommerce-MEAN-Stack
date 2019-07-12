@@ -10,7 +10,7 @@ router.post('/create', productController.create);
 
 router.get('/:id', productController.findOne);
 
-router.put('/:id', productController.update);
+router.post('/:id', productController.update);
 
 router.delete('/:id', productController.delete);
 

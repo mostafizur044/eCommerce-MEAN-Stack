@@ -29,6 +29,7 @@ const create = (req, res, next) => {
 
 const findOne = (req, res, next) => {
   Cart.findById(req.params.id)
+    .select({'ProductIds._id': 0})
     .then(cart => {
       if (!cart) error404(res, "Cart not found with id " + req.params.id);
       getOneResponse(res, cart);
@@ -39,12 +40,33 @@ const findOne = (req, res, next) => {
     });
 };
 
-const updateCartItem = (req, res, next) => {
-    Cart.findById(req.params.id).then(
+const updateCart= (req, res, next) => {
+  const id = req.params.id;
+  const data = req.body;
+    Cart.findById(id).then(
       cart => {
-        if (!cart) error404(res, "Cart not found with id " + req.params.id);
-        cart.ProductIds = [...cart.ProductIds, req.body];
-        Cart.findByIdAndUpdate(req.params.id, { ...cart }, { new: true })
+        if (!cart) error404(res, "Cart not found with id " + id);
+        console.log({_id: `ObjectId("${id}")`}, { $push: {'ProductIds': data} })
+        Cart.findOneAndUpdate({'_id': id}, { '$push': {'ProductIds': data} })
+        .then(respon => {
+            response(res, 'Item added to cart');
+        });
+      }
+    )
+    .catch(err => {
+      NotFoundInCatch(res, err, `Cart not found with id ${err.value}`);
+      error500(res, `Error updating cart with id ${err.value}`);
+    });
+};
+
+const updateCartItemQty = (req, res, next) => {
+  const id = req.params.id;
+  const data = req.body;
+    Cart.findById(id).then(
+      cart => {
+        console.log(id, data)
+        if (!cart) error404(res, "Cart not found with id " + id);
+        Cart.findOneAndUpdate({_id: id, 'ProductIds.ProductId': data.ProductId}, { $set: {'ProductIds.$.Qunatity': data.Qunatity} })
         .then(cart => {
             response(res, 'Cart item updated');
         });
@@ -57,11 +79,12 @@ const updateCartItem = (req, res, next) => {
 };
 
 const deleteCartItem = (req, res, next) => {
-    Cart.findById(req.params.id).then(
+  const id = req.params.id;
+  const data = req.body;
+    Cart.findById(id).then(
         cart => {
-          if (!cart) error404(res, "Cart not found with id " + req.params.id);
-          cart.ProductIds = cart.ProductIds.filter( item => item.ProductId !== res.body.ProductId);
-          Cart.findByIdAndUpdate(req.params.id, { ...cart }, { new: true })
+          if (!cart) error404(res, "Cart not found with id " + id);
+          Cart.findOneAndUpdate({_id: id}, { $pull: {'ProductIds': { 'ProductId' : data.ProductId } } })
           .then(cart => {
             response(res, 'Cart item deleted');
           });
@@ -88,7 +111,8 @@ const deleteCart = (req, res, next) => {
 module.exports = {
   create,
   findOne,
-  updateCartItem,
+  updateCart,
+  updateCartItemQty,
   deleteCartItem,
   delete: deleteCart
 };

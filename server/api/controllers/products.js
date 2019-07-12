@@ -51,13 +51,14 @@ const getProduct = (req, res, next) => {
     page: req.body.page || 0,
     limit: req.body.limit || 10
   }
-  Products.find({filter})
-  .select(req.body.fields || null)
+  Products.find()
+  .where(filter)
   .sort(sort)
   .skip(pageOptions.page * pageOptions.limit)
-  .limit(pageOptions.page)
+  .limit(pageOptions.limit)
   .then(products => {
-    Products.collection.countDocuments().then(totalCount => {
+    Products.collection.countDocuments(filter).then(totalCount => {
+      console.log(filter, totalCount)
       const data = {
         products,
         totalCount,
@@ -102,7 +103,7 @@ const deleteProduct = (req, res, next) => {
   Products.findByIdAndRemove(req.params.id)
     .then(product => {
       if (!product) error404(res, "Product not found with id " + req.params.id);
-      res.send({ message: "Product deleted successfully!" });
+      response(res, "Product deleted successfully!");
     })
     .catch(err => {
       NotFoundInCatch(res, err, `Product not found with id ${err.value}`);

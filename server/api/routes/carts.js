@@ -6,9 +6,11 @@ router.post('/', cartController.create);
 
 router.get('/:id', cartController.findOne);
 
-router.put('/:id/update-item', cartController.updateCartItem);
+router.post('/:id', cartController.updateCart);
 
-router.put('/:id/delete-item', cartController.deleteCartItem);
+router.post('/update-item-qty/:id', cartController.updateCartItemQty);
+
+router.post('/delete-item/:id', cartController.deleteCartItem);
 
 router.delete('/:id', cartController.delete);
 
