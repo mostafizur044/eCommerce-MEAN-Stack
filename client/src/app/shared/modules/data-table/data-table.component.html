@@ -1,1 +1,23 @@
-<p>data-table works!</p>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+    <!-- Position Column -->
+    <ng-container *ngFor="let col of config.tableConfig" matColumnDef="{{col.column}}">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{col.title}}</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="col.template; else showOnlyValue">
+            <ng-container *ngTemplateOutlet="col.template; context: {$implicit: element}"></ng-container>
+        </ng-container>
+        <ng-template #showOnlyValue>{{element[col.column]}}</ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+    <mat-paginator [length]="config.pagination.totalItem"
+              [pageSize]="config.pagination.pageSize"
+              [pageSizeOptions]="config.pagination.pageSizeOptions"
+              (page)="pageEvent($event)">
+    </mat-paginator>
+</div>

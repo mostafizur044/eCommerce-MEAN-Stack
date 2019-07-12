@@ -1,0 +1,12 @@
+<div class="product-data-table">
+    <app-data-table [config]="dataTableConfig" [dataSource]="dataSource"></app-data-table>
+</div>
+
+
+<ng-template #name let-row>
+    <strong>{{row.name}}</strong>
+</ng-template>
+<ng-template #symbol let-row>
+    <b>{{row.symbol}}</b>
+</ng-template>
+

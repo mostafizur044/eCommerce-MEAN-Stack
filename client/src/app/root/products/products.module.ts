@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { Routes, RouterModule } from '@angular/router';
+import { DataTableModule } from '../../shared/modules/data-table/data-table.module';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   declarations: [CreateComponent, ListComponent],
   imports: [
     CommonModule,
+    DataTableModule,
     RouterModule.forChild(routes)
   ]
 })

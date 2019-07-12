@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const routes: Routes = [
-  {path: '', loadChildren: () => import('./admin/admin.module').then ( m => m.AdminModule)},
+  {path: '', loadChildren: () => import('./Root/Root.module').then ( m => m.RootModule)},
   {path: '**', redirectTo: ''}
 ];
 

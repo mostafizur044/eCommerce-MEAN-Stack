@@ -1,10 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const dictionaryController = require('../controllers/dictionary');
+const dictionaryController = require("../controllers/dictionary");
 
-router.post('/', dictionaryController.create);
-router.put('/:id', dictionaryController.update);
-router.get('/',  dictionaryController.getAll);
-router.delete('/:id', dictionaryController.deleteOne);
+router.get("/", dictionaryController.findAll);
+router.post("/", dictionaryController.create);
+router.delete("/:id", dictionaryController.delete);
 
 module.exports = router;

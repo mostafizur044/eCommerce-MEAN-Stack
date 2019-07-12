@@ -120,13 +120,14 @@ button {
   width: 90%;
   padding: 20px;
   margin: auto;
+  margin-top: 60px;
 
   .product-list {
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-flow: wrap;
-    margin-top: 60px;
+    
     padding: 30px;
   }
 
