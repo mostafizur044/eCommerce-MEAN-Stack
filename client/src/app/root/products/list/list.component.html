@@ -1,4 +1,12 @@
 <div class="product-data-table">
+
+    <div class="head-section" fxLayout="row" fxLayout.xs="column">
+        <h3 fxFlex="70">Product List</h3>
+        <div fxFlex="30" class="create-action">
+            <a [routerLink]="['./create']" mat-raised-button class="create-btn">Add New Product</a>
+        </div>
+    </div>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
     <app-data-table [config]="dataTableConfig"></app-data-table>
 </div>
 
@@ -7,6 +15,11 @@
     {{row.createdAt | date}}
 </ng-template>
 <ng-template #Action let-row>
-    
+    <a [routerLink]="['./edit', row._id]" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+    </a>
+    <button mat-icon-button (click)="deleteProduct(row)">
+        <mat-icon>delete</mat-icon>
+    </button>
 </ng-template>
 

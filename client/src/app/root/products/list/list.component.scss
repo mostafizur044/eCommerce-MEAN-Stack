@@ -1,0 +1,16 @@
+.product-data-table {
+    padding: 30px 0;
+
+    .head-section {
+        h3 {
+            margin-top: 0;
+        }
+        .create-action {
+            padding-bottom: 1em;
+            .create-btn {
+                background-color: #4169e1;
+                color: #ffffff;
+            }
+        }
+    }
+}

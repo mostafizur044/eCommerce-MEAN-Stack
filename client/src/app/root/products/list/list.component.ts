@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Product } from '../../../shared/model/data';
 import { DataTableComponent } from '../../../shared/modules/data-table/data-table.component';
 import { ProductService } from '../service/product.service';
+import {MatDialog} from '@angular/material/dialog';
+
+
 
 @Component({
   selector: 'app-list',
@@ -20,6 +23,7 @@ export class ListComponent implements OnInit {
     sortOrder: 1
   };
   filter: string = '';
+  loading: boolean = false;
 
   @ViewChild('Description', {static: true}) Description: TemplateRef<any>;
   @ViewChild('CreatedAt', {static: true}) CreatedAt: TemplateRef<any>;
@@ -27,6 +31,7 @@ export class ListComponent implements OnInit {
   @ViewChild('dataTableComponent', {static: true}) dataTableComponent: DataTableComponent<Product>;
 
   constructor(
+    private dialog: MatDialog,
     private service: ProductService
   ) { 
     this.getProducts(this.dataTableConfig);
@@ -45,13 +50,19 @@ export class ListComponent implements OnInit {
   }
 
   private getProducts(config) {
+    this.loading = true;
     this.service.getProducts(config, this.filter).subscribe(
       res => {
+        this.loading = false;
         this.dataTableConfig.dataSource = res.products;
         this.dataTableConfig.totalItem = res.totalCount;
         console.log(this.dataTableConfig)
       }
     );
+  }
+
+  deleteProduct(row) {
+    console.log(row);
   }
 
 }

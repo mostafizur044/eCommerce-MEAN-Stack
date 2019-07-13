@@ -27,4 +27,10 @@ export class ProductService {
       )
     );
   }
+
+  getSingleProduct (id) {
+    return this.http.get(`products/${id}`).pipe(
+      map ( (res: any) => res.data)
+    );
+  }
 }
