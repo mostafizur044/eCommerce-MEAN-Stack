@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const cartSchema = new Schema({
     ProductIds: [{
         ProductId: Schema.Types.ObjectId,
-        Qunatity: Number
+        Quantity: Number
     }],
     createdAt: {type: Date, default: Date.now},
     updatedAt: {type: Date, default: Date.now}

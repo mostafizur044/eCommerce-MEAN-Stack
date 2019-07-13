@@ -1,0 +1,13 @@
+.navigation {
+    a {
+        text-decoration: none;
+        padding: 0 15px;
+        color: #707070;
+        &:hover {
+            color: #4169e1;
+        }
+    }
+    .active {
+        color: #4169e1;
+    }
+}

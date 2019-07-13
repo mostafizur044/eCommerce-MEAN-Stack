@@ -7,7 +7,7 @@ import {
   EventEmitter
 } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
-import { DataTableConfig, Pagination } from "./dataTable.model";
+import { DataTableConfig } from "./dataTable.model";
 import { Sort } from "@angular/material/sort";
 
 @Component({
@@ -15,30 +15,34 @@ import { Sort } from "@angular/material/sort";
   templateUrl: "./data-table.component.html",
   styleUrls: ["./data-table.component.scss"]
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent<T> implements OnInit {
 
   displayedColumns: string[] = [];
 
-  @Input("config") config: DataTableConfig;
-  @Input("dataSource") dataSource = [];
-  @Output("pageEvent") pageChange: EventEmitter<any> = new EventEmitter();
+  @Input("config") config: DataTableConfig<T>;
+  changeTableData: EventEmitter<DataTableConfig<T>> = new EventEmitter<DataTableConfig<T>>();
+  @Output("pageEvent") pageChange: EventEmitter<DataTableConfig<T>> = new EventEmitter();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor() {}
 
   ngOnInit() {
-    if (!this.config) this.config = new DataTableConfig();
-    if (this.config && !this.config.pagination)
-      this.config.pagination = new Pagination();
-    this.config.pagination.pageSizeOptions = this.config.pagination
-      .pageSizeOptions
-      ? this.config.pagination.pageSizeOptions
+    this.preparDataTable(this.config);
+    this.changeTableData.subscribe((response: DataTableConfig<T>) => {
+      console.log('Change table Data');
+      this.preparDataTable(response);
+    });
+  }
+
+  private preparDataTable (config: DataTableConfig<T>) {
+    if (!config) config = new DataTableConfig();
+    config.pageSizeOptions = config.pageSizeOptions
+      ? config.pageSizeOptions
       : [10, 25, 50, 100];
-    if (this.config && !this.config.tableConfig) this.config.tableConfig = [];
-    if (!this.dataSource) this.dataSource = [];
-    this.displayedColumns = this.config.tableConfig.map(m => m.column);
-    console.log(this.config, this.dataSource)
+    if (config && !config.tableConfig) config.tableConfig = [];
+    if (config && !config.dataSource) config.dataSource = [];
+    this.displayedColumns = config.tableConfig.map(m => m.column);
   }
 
   pageEvent(event) {

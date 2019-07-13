@@ -11,6 +11,7 @@ const {
 } = require("../lib/response");
 
 const Cart = require("../models/Carts");
+const Products = require("../models/Products");
 
 const create = (req, res, next) => {
   const cart = new Cart(req.body);
@@ -30,9 +31,27 @@ const create = (req, res, next) => {
 const findOne = (req, res, next) => {
   Cart.findById(req.params.id)
     .select({'ProductIds._id': 0})
-    .then(cart => {
-      if (!cart) error404(res, "Cart not found with id " + req.params.id);
-      getOneResponse(res, cart);
+    .then(cartOne => {
+      if (!cartOne) error404(res, "Cart not found with id " + req.params.id);
+      const cart = cartOne;
+      const ids = cart.ProductIds.map( m => m.ProductId);
+      console.log(ids)
+      const filter = { '_id': { '$in': ids}};
+      Products.find().where(filter)
+      // .populate('Category')
+      // .populate('Origin')
+      .then(
+        products => {
+          // console.log(products)
+          const data = {
+            _id: cart._id,
+            ProductIds : cart.ProductIds,
+            products: products
+          }
+          getOneResponse(res, data);
+        }
+      );
+      
     })
     .catch(err => {
       NotFoundInCatch(res, err, `Cart not found with id ${err.value}`);
@@ -46,7 +65,7 @@ const updateCart= (req, res, next) => {
     Cart.findById(id).then(
       cart => {
         if (!cart) error404(res, "Cart not found with id " + id);
-        console.log({_id: `ObjectId("${id}")`}, { $push: {'ProductIds': data} })
+        // console.log({_id: `ObjectId("${id}")`}, { $push: {'ProductIds': data} })
         Cart.findOneAndUpdate({'_id': id}, { '$push': {'ProductIds': data} })
         .then(respon => {
             response(res, 'Item added to cart');
@@ -64,9 +83,9 @@ const updateCartItemQty = (req, res, next) => {
   const data = req.body;
     Cart.findById(id).then(
       cart => {
-        console.log(id, data)
+        // console.log(id, data)
         if (!cart) error404(res, "Cart not found with id " + id);
-        Cart.findOneAndUpdate({_id: id, 'ProductIds.ProductId': data.ProductId}, { $set: {'ProductIds.$.Qunatity': data.Qunatity} })
+        Cart.findOneAndUpdate({_id: id, 'ProductIds.ProductId': data.ProductId}, { $set: {'ProductIds.$.Quantity': data.Quantity} })
         .then(cart => {
             response(res, 'Cart item updated');
         });

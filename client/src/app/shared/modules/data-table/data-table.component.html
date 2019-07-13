@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
+  <table mat-table [dataSource]="config.dataSource" matSort (matSortChange)="sortData($event)">
     <!-- Position Column -->
     <ng-container *ngFor="let col of config.tableConfig" matColumnDef="{{col.column}}">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>{{col.title}}</th>
@@ -15,9 +15,9 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-    <mat-paginator [length]="config.pagination.totalItem"
-              [pageSize]="config.pagination.pageSize"
-              [pageSizeOptions]="config.pagination.pageSizeOptions"
+    <mat-paginator [length]="config.totalItem"
+              [pageSize]="config.pageSize"
+              [pageSizeOptions]="config.pageSizeOptions"
               (page)="pageEvent($event)">
     </mat-paginator>
 </div>

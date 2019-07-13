@@ -1,12 +1,12 @@
 <div class="product-data-table">
-    <app-data-table [config]="dataTableConfig" [dataSource]="dataSource"></app-data-table>
+    <app-data-table [config]="dataTableConfig"></app-data-table>
 </div>
 
 
-<ng-template #name let-row>
-    <strong>{{row.name}}</strong>
+<ng-template #CreatedAt let-row>
+    {{row.createdAt | date}}
 </ng-template>
-<ng-template #symbol let-row>
-    <b>{{row.symbol}}</b>
+<ng-template #Action let-row>
+    
 </ng-template>
 

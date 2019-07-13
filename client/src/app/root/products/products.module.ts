@@ -4,6 +4,8 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { DataTableModule } from '../../shared/modules/data-table/data-table.module';
+import { ProductService } from './service/product.service';
+
 
 
 const routes: Routes = [
@@ -18,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     DataTableModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [ProductService]
 })
 export class ProductsModule { }

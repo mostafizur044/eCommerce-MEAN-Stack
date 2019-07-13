@@ -5,12 +5,11 @@ export class TableConfig {
     template?: any;
   };
   
-export class DataTableConfig {
-    pagination: Pagination = new Pagination();
+export class DataTableConfig<T> {
     tableConfig: TableConfig[] = [];
-};
-  
-export class Pagination {
+    dataSource: Array<T> = [];
+    sortKey: string;
+    sortOrder: number;
     totalItem: number = 0;
     pageSize: number = 10;
     page: number = 0;
