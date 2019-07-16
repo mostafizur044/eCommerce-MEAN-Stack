@@ -8,7 +8,8 @@ const {
   getAllResponse,
   createResponse,
   updateResponse,
-  getOneResponse
+  getOneResponse,
+  response
 } = require("../lib/response");
 
 const Products = require("../models/Products");
@@ -98,7 +99,7 @@ const update = (req, res, next) => {
   Products.findByIdAndUpdate(req.params.id, { ...req.body }, { new: true })
     .then(product => {
       if (!product) error404(res, "Product not found with id " + req.params.id);
-      updateResponse(res, product);
+      updateResponse(res, product, 'Product updated successfully');
     })
     .catch(err => {
       NotFoundInCatch(res, err, `Product not found with id ${err.value}`);

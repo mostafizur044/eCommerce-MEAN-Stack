@@ -1,3 +1,24 @@
 .create-section {
-    padding: 30px 0;
+    padding: 30px 15%;
+
+    .product-form {
+        .form-field {
+            width: 100%;
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+            background-color: #4169e1;
+            color: #ffffff;
+        }
+
+        .mat-raised-button[disabled][disabled] {
+            background-color: rgba(0,0,0,.12);
+        }
+        ::ng-deep {
+            .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+                color: #4169e1;
+            }
+        }
+    }
 }

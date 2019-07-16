@@ -11,3 +11,14 @@
         color: #4169e1;
     }
 }
+
+.router-change-progress-bar {
+   ::ng-deep {
+    .mat-progress-bar {
+        position: absolute!important;
+        top: 70px;
+        left: 0;
+        z-index: 9999;
+    }
+   }
+}

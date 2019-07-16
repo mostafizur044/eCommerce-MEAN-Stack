@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-Root',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RootComponent implements OnInit {
 
-  constructor() { }
+  routeLoading: boolean;
+
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.router.events.subscribe(
+      event => {
+        if(event instanceof NavigationStart) {
+          this.routeLoading = true;
+        }
+
+        if(event instanceof NavigationEnd) {
+          this.routeLoading = false;
+        }
+      }
+    );
   }
 
 }

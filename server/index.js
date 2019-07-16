@@ -6,6 +6,9 @@ const productRoute = require('./api/routes/products');
 const dictionaryRoute = require('./api/routes/dictionary');
 const cartRoute = require('./api/routes/carts');
 
+mongoose.set('useFindAndModify', false);
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://mostafiz:mostafiz044@ds243344.mlab.com:43344/accounting');
 
 const app = express();

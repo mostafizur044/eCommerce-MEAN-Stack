@@ -23,6 +23,10 @@
     </div>
   </nav>
 </header>
+
 <main class="wrapper">
+  <div class="router-change-progress-bar">
+    <mat-progress-bar *ngIf="routeLoading" mode="indeterminate"></mat-progress-bar>
+  </div>
   <router-outlet></router-outlet>
 </main>

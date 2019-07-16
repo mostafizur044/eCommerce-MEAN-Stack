@@ -33,4 +33,34 @@ export class ProductService {
       map ( (res: any) => res.data)
     );
   }
+
+  getDictionary() {
+    return this.http.get('dictionary').pipe(
+      map((res: any) => this.formatDictionary(res.data) ),
+      catchError( err => of({origin: [], category: []}))
+    );
+  }
+
+  private formatDictionary(data) {
+    let dic = {origin: [], category: []};
+    data.forEach(element => {
+      if(element.Type === 'Origin') {
+        dic.origin.push(element);
+      } else {
+        dic.category.push(element);
+      }
+    });
+    return dic;
+  }
+
+  saveProduct(id, data) {
+    if(id) {
+      return this.http.post('products/' + id, data).toPromise();
+    }
+    return this.http.post('products/create', data).toPromise();
+  }
+
+  deleteProduct(id) {
+    return this.http.delete('products/' + id).toPromise();
+  }
 }

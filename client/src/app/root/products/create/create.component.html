@@ -1,9 +1,87 @@
+
 <div class="create-section">
-    <h3>Create Product</h3>
+  <h3>{{title}} Product</h3>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div class="product-form" *ngIf="!loading">
+    <form [formGroup]="productForm" (ngSubmit)="productSubmit(productForm)">
+      
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-form-field autofilled="false" class="form-field">
+                    <input type="text" #ProductName matInput placeholder="Product Name*" maxlength="50" formControlName="ProductName">
+                    <mat-hint>{{ProductName.value.length}}/50 (minimum 3 character)</mat-hint>
+                    <mat-error *ngIf="productForm.get('ProductName').hasError('required')">Product name required</mat-error>
+                </mat-form-field>
+            </div>
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-form-field  autofilled="false" class="form-field">
+                    <input readonly type="text" maxlength="50" matInput placeholder="Product Shotcode*" [value]="productShotCode" >
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-form-field autofilled="false" class="form-field">
+                    <input type="number" matInput placeholder="Price*" min="0" formControlName="Price">
+                    <mat-error *ngIf="productForm.get('Price').hasError('required')">Price required</mat-error>
+                    <mat-error *ngIf="productForm.get('Price').hasError('min')">Price should be positive number</mat-error>
+                </mat-form-field>
+            </div>
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-form-field  autofilled="false" class="form-field">
+                    <input type="number" matInput placeholder="Quantity*" min="0" formControlName="Quantity" >
+                    <mat-error *ngIf="productForm.get('Quantity').hasError('required')">Quantity required</mat-error>
+                    <mat-error *ngIf="productForm.get('Quantity').hasError('min')">Quantity should be positive number</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
 
-    <div>
-        <!-- <form >
+        <div fxLayout="row" fxLayoutGap="20px">
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-form-field autofilled="false" class="form-field">
+                    <textarea #Description maxlength="250" matInput placeholder="Description" formControlName="Description"></textarea>
+                    <mat-hint>{{Description.value.length}}/250</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
 
-        </form> -->
-    </div>
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-form-field class="form-field">
+                    <mat-label>Origin*</mat-label>
+                    <mat-select formControlName="Origin">
+                        <mat-option *ngFor="let ori of origins" [value]="ori._id">
+                        {{ori.Name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="productForm.get('Origin').hasError('required')">Origin required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mb-10" fxFlex="100">
+                <mat-form-field class="form-field">
+                    <mat-label>Category*</mat-label>
+                    <mat-select formControlName="Category">
+                        <mat-option *ngFor="let cate of categories" [value]="cate._id">
+                        {{cate.Name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="productForm.get('Category').hasError('required')">Category required</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-checkbox formControlName="IsBestAchived">Is Best Achived</mat-checkbox> 
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px">
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <button class="submit-btn" [disabled]="productForm.invalid" mat-raised-button type="submit" >Submit</button>
+            </div>
+        </div>
+      
+    </form>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 export class Product {
     ProductName: string;
-    ProductShotCode: string;
+    ProductShotCode: string = '';
     Category: string;
     Price: number;
     Quantity: number;

@@ -18,8 +18,18 @@
     <a [routerLink]="['./edit', row._id]" mat-icon-button>
         <mat-icon>edit</mat-icon>
     </a>
-    <button mat-icon-button (click)="deleteProduct(row)">
+    <button mat-icon-button (click)="openDeleteModal(row)">
         <mat-icon>delete</mat-icon>
     </button>
+</ng-template>
+
+<ng-template #dialogRef let-data>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <mat-dialog-content>
+        <p>Are you sure, you want to delete?</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="deleteProduct(data)">Submit</button>
+    </mat-dialog-actions>
 </ng-template>
 

@@ -3,7 +3,7 @@ import { Product } from '../../../shared/model/data';
 import { DataTableComponent } from '../../../shared/modules/data-table/data-table.component';
 import { ProductService } from '../service/product.service';
 import {MatDialog} from '@angular/material/dialog';
-
+import { CommonService } from '../../../shared/service/common.service';
 
 
 @Component({
@@ -24,15 +24,18 @@ export class ListComponent implements OnInit {
   };
   filter: string = '';
   loading: boolean = false;
+  dialogRef;
 
   @ViewChild('Description', {static: true}) Description: TemplateRef<any>;
   @ViewChild('CreatedAt', {static: true}) CreatedAt: TemplateRef<any>;
   @ViewChild('Action', {static: true}) Action: TemplateRef<any>;
   @ViewChild('dataTableComponent', {static: true}) dataTableComponent: DataTableComponent<Product>;
+  @ViewChild('dialogRef', {static: true}) dialogTemplateRef: TemplateRef<any>;
 
   constructor(
     private dialog: MatDialog,
-    private service: ProductService
+    private service: ProductService,
+    private commonService: CommonService
   ) { 
     this.getProducts(this.dataTableConfig);
   }
@@ -56,13 +59,30 @@ export class ListComponent implements OnInit {
         this.loading = false;
         this.dataTableConfig.dataSource = res.products;
         this.dataTableConfig.totalItem = res.totalCount;
-        console.log(this.dataTableConfig)
+        // console.log(this.dataTableConfig)
       }
     );
   }
 
-  deleteProduct(row) {
-    console.log(row);
+  openDeleteModal(row) {
+    this.dialogRef = this.dialog.open(this.dialogTemplateRef, {
+      data: row
+    });
+  }
+
+  deleteProduct(data) {
+    this.service.deleteProduct(data._id).then(
+      (res: any) => {
+        this.getProducts(this.dataTableConfig);
+        this.commonService.openSnackBar(res.message);
+        this.dialogRef.close();
+      }
+    ).catch(
+      err => {
+        // console.log(err)
+        this.commonService.openSnackBar(err.error ? err.error.message : err.message);
+      }
+    );
   }
 
 }
