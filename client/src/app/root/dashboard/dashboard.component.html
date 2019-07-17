@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<div class="product-list">
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <ng-container *ngFor="let product of config.products">
+        <app-card [product]="product"></app-card>
+    </ng-container>
+</div>

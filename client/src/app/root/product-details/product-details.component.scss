@@ -1,0 +1,31 @@
+.product-details {
+  padding: 30px;
+  .detail-container {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    .d-image {
+      flex: 1;
+      padding: 15px;
+      .d-img {
+        max-height: 250px;
+        object-fit: contain;
+      }
+    }
+
+    .details {
+      flex: 1;
+      padding: 15px;
+      padding-top: 30px;
+
+      h3,
+      h4 {
+        margin: 0;
+      }
+
+      .description {
+        margin-top: 20px;
+      }
+    }
+  }
+}

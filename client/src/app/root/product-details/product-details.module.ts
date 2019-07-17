@@ -1,24 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
+import { ProductDetailsComponent } from './product-details.component';
 import { Routes, RouterModule } from '@angular/router';
-import { CardModule } from '../../shared/modules/card/card.module';
-import { DashboardService } from './dashboard.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { ProductDetailsService } from './details.service';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent}
+  {path: '', component: ProductDetailsComponent}
 ];
 
+
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [ProductDetailsComponent],
   imports: [
     CommonModule,
     MatProgressBarModule,
     RouterModule.forChild(routes),
-    CardModule
   ],
-  providers: [DashboardService]
+  providers: [ProductDetailsService]
 })
-export class DashboardModule { }
+export class ProductDetailsModule { }

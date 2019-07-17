@@ -1,1 +1,22 @@
-<p>card works!</p>
+<div class="card">
+    <div class="product-image">
+        <img [src]="product.ImageLink" alt="Denim Jeans">
+        <div class="black-cover">
+            <a [routerLink]="['/product/', product._id]" class="details-btn">Show Details</a>
+        </div>
+    </div>
+    <div class="product-info">
+        <h4 class="title">{{product.ProductName}}</h4>
+        <h4 class="price">BDT {{product.Price | number: '1.2-2'}}</h4>
+    </div>
+    <h5 class="product-qty">Available Quantity: <span>{{product.Quantity}}</span></h5>  
+    <p class="description">{{product.Description}}</p>
+    <div class="add-cart-action">
+        <button class="add-cart-btn" *ngIf="!product.cartQty" (click)="cartQtyChange('inc', product)">Add to Cart</button>
+        <div class="btn-cart-action" *ngIf="product.cartQty">
+          <span class="btn-inc-dec" (click)="cartQtyChange('dec', product)">-</span>
+          <span class="qty">{{product.cartQty}}</span>
+          <span class="btn-inc-dec" (click)="cartQtyChange('inc', product)">+</span>
+        </div>
+    </div>
+</div>

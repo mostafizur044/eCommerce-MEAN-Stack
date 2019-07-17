@@ -64,7 +64,8 @@ export class CreateComponent implements OnInit, OnDestroy {
       Quantity: [data.Quantity, [Validators.required, Validators.min(0)]],
       Description: [data.Description, Validators.maxLength(250)],
       IsBestAchived: [data.IsBestAchived],
-      Origin: [(this.productId ? data.Origin._id : null), Validators.required]
+      Origin: [(this.productId ? data.Origin._id : null), Validators.required],
+      ImageLink: [data.ImageLink]
     });
     this.productShotCode = data.ProductShotCode;
     this.productForm.valueChanges.subscribe(val => {
@@ -98,6 +99,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   productSubmit(productForm: FormGroup) {
     productForm.value['ProductShotCode'] = this.productShotCode;
+    productForm.value['ImageLink'] = productForm.value['ImageLink'] ? productForm.value['ImageLink'] : 'http://www.independentmediators.co.uk/wp-content/uploads/2016/02/placeholder-image.jpg';
     this.service.saveProduct(this.productId, productForm.value).then(
       (res: any) => {
         if(this.productId) {

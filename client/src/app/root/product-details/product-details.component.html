@@ -1,0 +1,17 @@
+<section class="product-details">
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div *ngIf="product" class="detail-container">
+    <div class="d-image">
+      <img class="d-img" [src]="product?.ImageLink" alt="" />
+    </div>
+    <div class="details">
+      <h3 class="title">{{product?.ProductName}}</h3>
+      <h4>Price: BDT {{product?.Price}}</h4>
+      <h4>
+        Review: <span>&#9733;</span> <span>&#9733;</span> <span>&#9733;</span>
+        <span>&#9733;</span>
+      </h4>
+      <div class="description">{{product?.Description}}</div>
+    </div>
+  </div>
+</section>
