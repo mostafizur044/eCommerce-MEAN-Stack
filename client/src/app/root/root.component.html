@@ -11,16 +11,7 @@
       <a [routerLink]="['/products']" routerLinkActive="active">Products</a>
       <a [routerLink]="['/my-cart']" routerLinkActive="active">My Cart</a>
     </div>
-    <div class="cart-image">
-      <img
-        src="https://www.iconbunny.com/icons/media/catalog/product/1/0/1087.9-shopping-bag-icon-iconbunny.jpg"
-        alt="cart_icon"
-      />
-      <div class="counter">2</div>
-      <div class="show-cart-items display-none">
-        <app-cart-panel></app-cart-panel>
-      </div>
-    </div>
+    <app-cart-panel></app-cart-panel>
   </nav>
 </header>
 

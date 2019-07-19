@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
+
 @Component({
   selector: 'app-Root',
   templateUrl: './Root.component.html',
@@ -12,7 +13,9 @@ export class RootComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit() {
     this.router.events.subscribe(
@@ -26,6 +29,7 @@ export class RootComponent implements OnInit {
         }
       }
     );
+    
   }
 
 }

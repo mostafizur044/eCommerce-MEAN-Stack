@@ -4,6 +4,8 @@ import { DataTableComponent } from '../../../shared/modules/data-table/data-tabl
 import { ProductService } from '../service/product.service';
 import {MatDialog} from '@angular/material/dialog';
 import { CommonService } from '../../../shared/service/common.service';
+import { CartService } from '../../../shared/service/cart.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -25,6 +27,9 @@ export class ListComponent implements OnInit {
   filter: string = '';
   loading: boolean = false;
   dialogRef;
+  subs: Subscription[] = [];
+  products: Product[] = [];
+
 
   @ViewChild('Description', {static: true}) Description: TemplateRef<any>;
   @ViewChild('CreatedAt', {static: true}) CreatedAt: TemplateRef<any>;
@@ -35,7 +40,8 @@ export class ListComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private service: ProductService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private cartService: CartService
   ) { 
     this.getProducts(this.dataTableConfig);
   }
@@ -50,6 +56,20 @@ export class ListComponent implements OnInit {
       {column: 's', title: '', template: this.Action}
     ];
 
+    this.subs.push(
+      this.cartService.cartItems.subscribe (
+        val => {
+          if(val) {
+            this.dataTableConfig.dataSource = this.service.formateProduct(this.products, val);
+          }
+        }
+      )
+    );
+
+  }
+  
+  ngOnDestroy() {
+    this.subs.forEach( f => f.unsubscribe());
   }
 
   private getProducts(config) {
@@ -57,7 +77,8 @@ export class ListComponent implements OnInit {
     this.service.getProducts(config, this.filter).subscribe(
       res => {
         this.loading = false;
-        this.dataTableConfig.dataSource = res.products;
+        this.products = res.products;
+        this.dataTableConfig.dataSource = this.service.formateProduct(this.products, this.cartService.cartItmesValue);
         this.dataTableConfig.totalItem = res.totalCount;
         // console.log(this.dataTableConfig)
       }

@@ -1,1 +1,10 @@
-<p>my-cart works!</p>
+<div class="product-list">
+    <ng-container *ngFor="let product of cartProduct">
+        <app-card [cartComponent]="true" [product]="product"></app-card>
+    </ng-container>
+    <ng-container *ngIf="cartProduct.length == 0">
+        <h4 class="no-data">
+            Your cart is empty. Go to <a routerLink="/dashboard">Buy Product</a>
+        </h4>
+    </ng-container>
+</div>

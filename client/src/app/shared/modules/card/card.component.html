@@ -3,20 +3,21 @@
         <img [src]="product.ImageLink" alt="Denim Jeans">
         <div class="black-cover">
             <a [routerLink]="['/product/', product._id]" class="details-btn">Show Details</a>
+            <button *ngIf="cartComponent" class="details-btn remove" (click)="removeCartItem(product)">Remove</button>
         </div>
     </div>
     <div class="product-info">
-        <h4 class="title">{{product.ProductName}}</h4>
-        <h4 class="price">BDT {{product.Price | number: '1.2-2'}}</h4>
+        <p class="title">{{product.ProductName}}</p>
+        <p class="price">BDT {{product.Price | number: '1.2-2'}}</p>
     </div>
-    <h5 class="product-qty">Available Quantity: <span>{{product.Quantity}}</span></h5>  
-    <p class="description">{{product.Description}}</p>
+    <p class="product-qty">Available Quantity: <span>{{product.Quantity}}</span></p>  
     <div class="add-cart-action">
-        <button class="add-cart-btn" *ngIf="!product.cartQty" (click)="cartQtyChange('inc', product)">Add to Cart</button>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+        <button class="add-cart-btn" *ngIf="!product.cartQty" (click)="addToCart(product)">Add to Cart</button>
         <div class="btn-cart-action" *ngIf="product.cartQty">
-          <span class="btn-inc-dec" (click)="cartQtyChange('dec', product)">-</span>
+          <span class="btn-inc-dec" [ngClass]="decCheck ? '' : 'disable'" (click)="cartQtyChange('dec', product)">-</span>
           <span class="qty">{{product.cartQty}}</span>
-          <span class="btn-inc-dec" (click)="cartQtyChange('inc', product)">+</span>
+          <span class="btn-inc-dec" [ngClass]="incCheck ? '' : 'disable'" (click)="cartQtyChange('inc', product)">+</span>
         </div>
     </div>
 </div>

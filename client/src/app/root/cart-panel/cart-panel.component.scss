@@ -5,13 +5,14 @@
   color: #4169e1;
   border-radius: 2px;
   border-bottom: 1px solid #efefef;
+  font-weight: 400;
   button {
     float: right;
     font-size: 12px;
     padding: 5px;
-    border: 1px solid #4169e1;
+    border: 1px solid #707070;
     border-radius: 5px;
-    color: #4169e1;
+    color: #707070;
   }
 }
 
@@ -66,7 +67,7 @@
     .delete {
       flex: 1 1 5%;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 400;
     }
   }
 }
@@ -78,5 +79,5 @@
   color: #4169e1;
   border-radius: 2px;
   border-top: 1px solid #efefef;
-  font-weight: 600;
+  font-weight: 400;
 }

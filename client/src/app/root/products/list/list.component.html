@@ -18,7 +18,7 @@
     <a [routerLink]="['./edit', row._id]" mat-icon-button>
         <mat-icon>edit</mat-icon>
     </a>
-    <button mat-icon-button (click)="openDeleteModal(row)">
+    <button [ngClass]="row.disable ? 'disable' : ''" mat-icon-button (click)="openDeleteModal(row)">
         <mat-icon>delete</mat-icon>
     </button>
 </ng-template>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../../shared/service/http.service';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import {cloneDeep} from 'loadsh';
 
 @Injectable()
 export class DashboardService {
@@ -26,6 +27,16 @@ export class DashboardService {
         })
       )
     );
+  }
+
+  formateProduct(data, cartList) {
+    const products = cloneDeep(data);
+    return products.map( m => {
+      const cart = cartList.find( c => c._id === m._id);
+      if(cart) m = {...m, ...cart};
+      m['cartQty'] = m['cartQty'] || 0;
+      return m;
+    });
   }
 
   

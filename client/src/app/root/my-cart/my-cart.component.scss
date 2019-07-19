@@ -1,0 +1,13 @@
+.product-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap;
+  padding: 30px;
+}
+.no-data {
+  font-weight: 400;
+  a {
+    color: #4169e1;
+  }
+}

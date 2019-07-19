@@ -5,6 +5,7 @@ import { ProductService } from '../service/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../../../shared/model/data';
 import { CommonService } from '../../../shared/service/common.service';
+import { CartService } from '../../../shared/service/cart.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class CreateComponent implements OnInit, OnDestroy {
     private service: ProductService,
     private fb: FormBuilder,
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private cartService: CartService
   ) {
     this.getDictionary();
   }
@@ -104,6 +106,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       (res: any) => {
         if(this.productId) {
           this.commonService.openSnackBar(res.message);
+          this.updateCart(productForm.value);
         } else {
           this.router.navigate(['/products']);
         }
@@ -115,6 +118,16 @@ export class CreateComponent implements OnInit, OnDestroy {
     );
   }
 
-
+  private updateCart(data) {
+    const pro = this.cartService.cartItmesValue.find( f => f._id === this.productId);
+    if(pro) {
+      const newPro = {...pro, ...data};
+      if(newPro['cartQty'] >  newPro.Quantity) {
+        newPro['cartQty'] = newPro.Quantity;
+        this.cartService.updateProductQtyToCart({ProductId: this.productId, Quantity: newPro.Quantity});
+      }
+      this.cartService.cartItemChange.emit(newPro);
+    }
+  }
 
 }

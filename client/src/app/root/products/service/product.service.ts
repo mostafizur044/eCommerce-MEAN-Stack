@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "../../../shared/service/http.service";
 import { of } from "rxjs";
 import { map, catchError } from "rxjs/operators";
+import {cloneDeep} from 'loadsh';
 
 @Injectable()
 export class ProductService {
@@ -62,5 +63,14 @@ export class ProductService {
 
   deleteProduct(id) {
     return this.http.delete('products/' + id).toPromise();
+  }
+
+  formateProduct(data, cartList) {
+    const products = cloneDeep(data);
+    return products.map( m => {
+      const cart = cartList.find( c => c._id === m._id);
+      if(cart) m['disable'] = true;
+      return m;
+    });
   }
 }

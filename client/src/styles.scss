@@ -9,10 +9,11 @@ body {
   padding: 0;
   font-size: 16px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 300;
 }
 
 body {
-  line-height: 1.7;
+  line-height: 1.5;
   color: #333333;
   -webkit-font-smoothing: antialiased;
 }
@@ -35,7 +36,6 @@ body {
     box-shadow: 0px 3px 10px 0px rgba(135, 133, 135, 1);
 
     .logo {
-      flex: 1;
       padding-left: 65px;
       img {
         width: 100px;
@@ -44,8 +44,12 @@ body {
       }
     }
 
-    .cart-image {
+    .navigation {
       flex: 1;
+      text-align: center;
+    }
+
+    .cart-image {
       position: relative;
       right: 0;
       width: 40px;
@@ -85,13 +89,14 @@ body {
         border-radius: 2px;
         z-index: 9999;
         text-align: left;
+        
       }
     }
   }
 }
 
 .disable {
-  pointer-events: none;
+  pointer-events: none!important;
   opacity: 0.7;
 }
 
@@ -143,8 +148,7 @@ button {
   .card .product-image {
     width: 300px;
     height: 220px;
-    padding: 10px;
-
+    margin-bottom: 10px;
     position: relative;
     .black-cover {
       position: absolute;
@@ -155,13 +159,20 @@ button {
       left: 0;
       background: rgba(201, 200, 201, 0.5);
       display: none;
+      flex-flow: column;
 
       .details-btn {
+        margin: 4px;
         padding: 10px 20px;
         background-color: #4169e1;
         color: #ffffff;
         font-size: 14px;
         border-radius: 30px;
+        text-decoration: none;
+        line-height: 1;
+      }
+      .remove {
+        background: #707070;
       }
     }
 
@@ -173,40 +184,34 @@ button {
   }
 
   .card .product-image img {
-    width: 280px;
-    height: 200px;
-    object-fit: contain;
+    width: 300px;
+    height: 220px;
+    object-fit: cover;
   }
 
   .card .product-info {
-    padding: 10px 15px;
-    display: flex;
+    padding: 5px 10px;
   }
 
   .card .product-info .title {
     margin: 0;
-    flex: 2;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
   }
 
   .card .product-info .price {
     margin: 0;
-    flex: 1;
-    color: grey;
-    text-align: right;
-  }
-
-  .card .description {
-    margin: 0;
-    padding: 10px 15px;
     font-size: 14px;
+    text-align: center;
   }
 
   .card .product-qty {
     margin: 0;
-    padding: 0 15px;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 12px;
   }
 
   .card .add-cart-action {

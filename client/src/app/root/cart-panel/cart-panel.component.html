@@ -1,7 +1,41 @@
-<h3 class="title">
-  Your Cart <button class="cart-close" type="button">Close</button>
-</h3>
-<div class="cart-container"></div>
-<div class="total-amount-section">
-  Total Amount: $<span class="total-cart-amount"></span>
+<div class="cart-image">
+  <img (click)="onCart = !onCart"
+    src="https://www.iconbunny.com/icons/media/catalog/product/1/0/1087.9-shopping-bag-icon-iconbunny.jpg"
+    alt="cart_icon"
+  />
+  <div class="counter" (click)="onCart = !onCart">{{count}}</div>
+  <div class="show-cart-items" *ngIf="onCart">
+    <h3 class="title">
+      Your Cart <button class="cart-close" type="button" (click)="onCart = !onCart">Close</button>
+    </h3>
+    <div class="cart-container">
+      <div class="cart-item" *ngFor="let product of cartProducts; trackBy: trackByItem">
+        <div class="image">
+          <img [src]="product.ImageLink" alt="" />
+        </div>
+        <div class="info">
+          <h5>{{product.ProductName}}</h5>
+          <p class="product-price">
+            {{(product.Price * product.cartQty) | number}}
+          </p>
+          <div class="btn-cart-action">
+            <span class="btn-cart-inc-dec" [ngClass]="product.cartQty > 1 ? '' : 'disable'" (click)="cartQtyChange('dec', product)"
+              >-</span
+            >
+            <span class="qty">{{product.cartQty}}</span>
+            <span class="btn-cart-inc-dec" [ngClass]="product.Quantity > 0 ? '' : 'disable'" (click)="cartQtyChange('inc', product)"
+              >+</span
+            >
+          </div>
+          <div *ngIf="loadingId == product._id"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
+        </div>
+        <div class="delete" (click)="removeItem(product)">
+          &#10006;
+        </div>
+      </div>
+    </div>
+    <div class="total-amount-section">
+      Total Amount: BDT <span class="total-cart-amount">{{total | number}}</span>
+    </div>    
+  </div>
 </div>
