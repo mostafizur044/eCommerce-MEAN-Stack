@@ -24,9 +24,7 @@ app.use('/api/products', productRoute);
 app.use('/api/dictionary', dictionaryRoute);
 app.use('/api/cart', cartRoute);
 
-app.get('/', (req, res) => {
-    res.send(``);
-});
+app.use('/', express.static(__dirname + '/dist/eCommerce'));
 
 app.listen(PORT, () => {
     console.log(`Server listen from ${PORT}.....`);

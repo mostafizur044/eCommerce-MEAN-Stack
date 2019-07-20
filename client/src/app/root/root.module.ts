@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RootComponent } from './Root.component';
+import { RootComponent } from './root.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CartPanelComponent } from './cart-panel/cart-panel.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';

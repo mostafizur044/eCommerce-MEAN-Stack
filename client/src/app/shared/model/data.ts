@@ -1,4 +1,5 @@
 export class Product {
+    _id?: string;
     ProductName: string;
     ProductShotCode: string = '';
     Category: string;
@@ -8,4 +9,5 @@ export class Product {
     IsBestAchived: boolean = false;
     Origin: string;
     ImageLink: string;
+    cartQty?: number;
 }

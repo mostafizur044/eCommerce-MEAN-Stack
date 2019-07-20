@@ -8,7 +8,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 const routes: Routes = [
-  {path: '', loadChildren: () => import('./Root/Root.module').then ( m => m.RootModule)},
+  {path: '', loadChildren: () => import('./root/root.module').then ( m => m.RootModule)},
   {path: '**', redirectTo: ''}
 ];
 

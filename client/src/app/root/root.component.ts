@@ -3,9 +3,9 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 
 @Component({
-  selector: 'app-Root',
-  templateUrl: './Root.component.html',
-  styleUrls: ['./Root.component.scss']
+  selector: 'app-root',
+  templateUrl: './root.component.html',
+  styleUrls: ['./root.component.scss']
 })
 export class RootComponent implements OnInit {
 
