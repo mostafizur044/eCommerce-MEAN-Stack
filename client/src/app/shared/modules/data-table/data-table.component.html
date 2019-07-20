@@ -2,7 +2,12 @@
   <table mat-table [dataSource]="config.dataSource" matSort (matSortChange)="sortData($event)">
     <!-- Position Column -->
     <ng-container *ngFor="let col of config.tableConfig" matColumnDef="{{col.column}}">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>{{col.title}}</th>
+      <ng-container *ngIf="col.sort; else noSort">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >{{col.title}}</th>
+      </ng-container>
+      <ng-template #noSort>
+        <th mat-header-cell *matHeaderCellDef>{{col.title}}</th>
+      </ng-template>
       <td mat-cell *matCellDef="let element">
         <ng-container *ngIf="col.template; else showOnlyValue">
             <ng-container *ngTemplateOutlet="col.template; context: {$implicit: element}"></ng-container>

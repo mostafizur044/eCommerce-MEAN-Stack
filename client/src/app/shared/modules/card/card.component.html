@@ -13,11 +13,11 @@
     <p class="product-qty">Available Quantity: <span>{{product.Quantity}}</span></p>  
     <div class="add-cart-action">
         <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-        <button class="add-cart-btn" *ngIf="!product.cartQty" (click)="addToCart(product)">Add to Cart</button>
+        <button class="add-cart-btn" *ngIf="!product.cartQty" [ngClass]="loading ? 'disable' : ''" (click)="addToCart(product)">Add to Cart</button>
         <div class="btn-cart-action" *ngIf="product.cartQty">
-          <span class="btn-inc-dec" [ngClass]="decCheck ? '' : 'disable'" (click)="cartQtyChange('dec', product)">-</span>
+          <span class="btn-inc-dec" [ngClass]="decCheck ? (loading ? 'disable' : '') : 'disable'" (click)="cartQtyChange('dec', product)">-</span>
           <span class="qty">{{product.cartQty}}</span>
-          <span class="btn-inc-dec" [ngClass]="incCheck ? '' : 'disable'" (click)="cartQtyChange('inc', product)">+</span>
+          <span class="btn-inc-dec" [ngClass]="incCheck ? (loading ? 'disable' : '') : 'disable'" (click)="cartQtyChange('inc', product)">+</span>
         </div>
     </div>
 </div>

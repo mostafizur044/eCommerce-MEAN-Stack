@@ -16,26 +16,26 @@
         <div class="info">
           <h5>{{product.ProductName}}</h5>
           <p class="product-price">
-            {{(product.Price * product.cartQty) | number}}
+            {{(product.Price * product.cartQty) | number: '1.2-2'}}
           </p>
           <div class="btn-cart-action">
-            <span class="btn-cart-inc-dec" [ngClass]="product.cartQty > 1 ? '' : 'disable'" (click)="cartQtyChange('dec', product)"
+            <span class="btn-cart-inc-dec" [ngClass]="product.cartQty > 1 ? (loadingId == product._id ? 'disable' : '') : 'disable'" (click)="cartQtyChange('dec', product)"
               >-</span
             >
             <span class="qty">{{product.cartQty}}</span>
-            <span class="btn-cart-inc-dec" [ngClass]="product.Quantity > 0 ? '' : 'disable'" (click)="cartQtyChange('inc', product)"
+            <span class="btn-cart-inc-dec" [ngClass]="product.Quantity > 0 ? (loadingId == product._id ? 'disable' : '') : 'disable'" (click)="cartQtyChange('inc', product)"
               >+</span
             >
           </div>
           <div *ngIf="loadingId == product._id"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
         </div>
-        <div class="delete" (click)="removeItem(product)">
+        <div class="delete" [ngClass]="loadingId == product._id ? 'disable' : ''" (click)="removeItem(product)">
           &#10006;
         </div>
       </div>
     </div>
     <div class="total-amount-section">
-      Total Amount: BDT <span class="total-cart-amount">{{total | number}}</span>
+      Total Amount: BDT <span class="total-cart-amount">{{total | number:'1.2-2'}}</span>
     </div>    
   </div>
 </div>

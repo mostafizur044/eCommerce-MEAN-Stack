@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { CommonService } from '../../../shared/service/common.service';
 import { CartService } from '../../../shared/service/cart.service';
 import { Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class ListComponent implements OnInit {
   dialogRef;
   subs: Subscription[] = [];
   products: Product[] = [];
-
+  searchCtr: FormControl;
 
   @ViewChild('Description', {static: true}) Description: TemplateRef<any>;
   @ViewChild('CreatedAt', {static: true}) CreatedAt: TemplateRef<any>;
@@ -44,15 +45,16 @@ export class ListComponent implements OnInit {
     private cartService: CartService
   ) { 
     this.getProducts(this.dataTableConfig);
+    this.searchCtr = new FormControl();
   }
 
   ngOnInit() {
     this.dataTableConfig['tableConfig'] = [
-      {column: 'ProductName', title: 'Name'},
+      {column: 'ProductName', title: 'Name' , sort: true},
       {column: 'ProductShotCode', title: 'Shot Code'},
       {column: 'Price', title: 'Price'},
-      {column: 'Quantity', title: 'Quantity'},
-      {column: 'createdAt', title: 'Created Date', template: this.CreatedAt},
+      {column: 'Quantity', title: 'Quantity', sort: true},
+      {column: 'createdAt', title: 'Created Date', sort: true, template: this.CreatedAt},
       {column: 's', title: '', template: this.Action}
     ];
 
@@ -85,6 +87,10 @@ export class ListComponent implements OnInit {
     );
   }
 
+  dataTableEventChange(config) {
+    this.getProducts(config);
+  }
+
   openDeleteModal(row) {
     this.dialogRef = this.dialog.open(this.dialogTemplateRef, {
       data: row
@@ -104,6 +110,27 @@ export class ListComponent implements OnInit {
         this.commonService.openSnackBar(err.error ? err.error.message : err.message);
       }
     );
+  }
+
+  emptyCheck() {
+    if(!this.searchCtr.value) {
+      this.filter = '';
+      const config = {...this.dataTableConfig, page: 0, pageSize: 10, sortKey: 'CreatedAt', sortOrder: 1};
+      this.getProducts(config);
+    }
+  }
+
+  clearsearch() {
+    this.searchCtr.setValue('');
+    this.emptyCheck();
+  }
+
+  loadDataTable() {
+    if(this.searchCtr.value) {
+      this.filter = `{'ProductName': { $in: ['${this.searchCtr.value}']}}`;
+      const config = {...this.dataTableConfig, page: 0, pageSize: 10, sortKey: 'CreatedAt', sortOrder: 1};
+      this.getProducts(config);
+    }
   }
 
 }

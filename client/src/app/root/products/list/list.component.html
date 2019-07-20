@@ -1,13 +1,17 @@
 <div class="product-data-table">
-
     <div class="head-section" fxLayout="row" fxLayout.xs="column">
         <h3 fxFlex="70">Product List</h3>
         <div fxFlex="30" class="create-action">
             <a [routerLink]="['./create']" mat-raised-button class="create-btn">Add New Product</a>
         </div>
     </div>
+    <!-- <div>
+        <mat-form-field fxFlex="60" fxFlex.lt-md="100" autofilled="false" class="form-field">
+            <input type="text" matInput placeholder="Search by product name" [formControl]="searchCtr" (keyup)="emptyCheck()" (keyup.enter)="loadDataTable()">
+        </mat-form-field>
+    </div> -->
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-    <app-data-table [config]="dataTableConfig"></app-data-table>
+    <app-data-table [config]="dataTableConfig" (dataTableEventChange)="dataTableEventChange($event)"></app-data-table>
 </div>
 
 

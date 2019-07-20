@@ -56,7 +56,6 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   get incCheck() {
-    if(this.cartComponent) return this.product['Quantity'] > 1;
     return this.product['Quantity'] > 0;
   }
 

@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { CartService } from '../../shared/service/cart.service';
 import { Subscription } from 'rxjs';
 import { Product } from '../../shared/model/data';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +22,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   subs: Subscription[] = [];
   products: Product[] = [];
+
+  @ViewChild(InfiniteScrollDirective, {static: false}) infiniteScroll: InfiniteScrollDirective;
 
   constructor(
     private service: DashboardService,
@@ -50,10 +54,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.service.getProducts(this.config, this.filter || '').subscribe(
       res => {
         this.loading = false;
-        this.config = {...this.config, ...res};
+        this.config.totalCount = res.totalCount;
+        this.config.products = [...this.config.products, ...res.products];
         this.products = this.service.formateProduct(this.config.products, this.cartService.cartItmesValue);
-      } 
+      },
+      err => this.config.page -= 1
     );
+  }
+
+  onScroll() {
+    // console.log(this.config.page)
+    if ((this.config.page * 12) < this.config.totalCount) {
+      this.config.page += 1; 
+      this.getProducts();
+    }
+
+    // this.infiniteScroll.ngOnDestroy();
+    // this.infiniteScroll.setup();
   }
 
 }

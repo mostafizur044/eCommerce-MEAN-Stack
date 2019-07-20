@@ -16,7 +16,7 @@ export class DashboardService {
       page: config.page,
       limit: 12,
       filter,
-      sortKey: 'ProductName',
+      sortKey: 'createdAt',
       sortOrder: -1
     };
     return this.http.post("products", sendData).pipe(

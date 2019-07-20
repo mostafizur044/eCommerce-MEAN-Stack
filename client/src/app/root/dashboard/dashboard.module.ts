@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CardModule } from '../../shared/modules/card/card.module';
 import { DashboardService } from './dashboard.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
     CommonModule,
     MatProgressBarModule,
     RouterModule.forChild(routes),
-    CardModule
+    CardModule,
+    InfiniteScrollModule
   ],
   providers: [DashboardService]
 })

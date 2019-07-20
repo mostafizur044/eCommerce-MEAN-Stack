@@ -75,6 +75,11 @@
                 <mat-checkbox formControlName="IsBestAchived">Is Best Achived</mat-checkbox> 
             </div>
         </div>
+        <div fxLayout="row" fxLayoutGap="20px" *ngIf="!productId">
+            <div ngClass.lt-md="mb-10" fxFlex="100">
+                <mat-checkbox [formControl]="addAnother">Add Another</mat-checkbox> 
+            </div>
+        </div>
 
         <div fxLayout="row" fxLayoutGap="20px">
             <div ngClass.lt-md="mb-10" fxFlex="100">

@@ -3,6 +3,7 @@ export class TableConfig {
     column: string = '';
     title: string = '';
     template?: any;
+    sort: boolean;
   };
   
 export class DataTableConfig<T> {

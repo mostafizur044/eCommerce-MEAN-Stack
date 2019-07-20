@@ -1,17 +1,37 @@
 <section class="product-details">
   <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-  <div *ngIf="product" class="detail-container">
-    <div class="d-image">
-      <img class="d-img" [src]="product?.ImageLink" alt="" />
+  <ng-container *ngIf="product">
+    <div class="detail-container">
+      <div class="d-image">
+        <img class="d-img" [src]="product?.ImageLink" alt="" />
+      </div>
+      <div class="details">
+        <h3 class="m-0 title">{{product?.ProductName}}</h3>
+        <h4 class="m-0 font-400">BDT {{product?.Price | number: '1.2-2'}}</h4>
+        <h4 class="m-0 font-400">
+          Review: <span>&#9733;</span> <span>&#9733;</span> <span>&#9733;</span>
+          <span>&#9733;</span>
+        </h4>
+        <div class="chips">
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip color="primary" selected>{{product?.Origin.Name}}</mat-chip>
+            <mat-chip color="accent" selected>{{product?.Category.Name}}</mat-chip>
+          </mat-chip-list>
+        </div>
+        <div>
+          <h4 class="m-0 font-400">Quantity: {{product?.Quantity}}</h4>
+          <div class="add-cart-action">
+            <mat-progress-bar *ngIf="loadingCart" mode="indeterminate"></mat-progress-bar>
+            <button class="add-cart-btn" *ngIf="!product.cartQty" [ngClass]="loadingCart ? 'disable' : ''" (click)="addToCart(product)">Add to Cart</button>
+            <div class="btn-cart-action" *ngIf="product.cartQty">
+              <span class="btn-inc-dec" [ngClass]="product.cartQty > 0 ? (loadingCart ? 'disable' : '') : 'disable'" (click)="cartQtyChange('dec', product)">-</span>
+              <span class="qty">{{product.cartQty}}</span>
+              <span class="btn-inc-dec" [ngClass]="product.Quantity > 0 ? (loadingCart ? 'disable' : '') : 'disable'" (click)="cartQtyChange('inc', product)">+</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="details">
-      <h3 class="title">{{product?.ProductName}}</h3>
-      <h4>Price: BDT {{product?.Price}}</h4>
-      <h4>
-        Review: <span>&#9733;</span> <span>&#9733;</span> <span>&#9733;</span>
-        <span>&#9733;</span>
-      </h4>
-      <div class="description">{{product?.Description}}</div>
-    </div>
-  </div>
+    <div class="description">{{product?.Description}}</div>
+  </ng-container>
 </section>

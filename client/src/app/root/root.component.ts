@@ -22,6 +22,7 @@ export class RootComponent implements OnInit {
       event => {
         if(event instanceof NavigationStart) {
           this.routeLoading = true;
+          window.scrollTo(0,0);
         }
 
         if(event instanceof NavigationEnd) {

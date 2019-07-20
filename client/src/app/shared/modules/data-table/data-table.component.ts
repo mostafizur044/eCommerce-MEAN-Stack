@@ -21,7 +21,7 @@ export class DataTableComponent<T> implements OnInit {
 
   @Input("config") config: DataTableConfig<T>;
   changeTableData: EventEmitter<DataTableConfig<T>> = new EventEmitter<DataTableConfig<T>>();
-  @Output("pageEvent") pageChange: EventEmitter<DataTableConfig<T>> = new EventEmitter();
+  @Output("dataTableEventChange") dataTableEventChange: EventEmitter<DataTableConfig<T>> = new EventEmitter();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -46,10 +46,14 @@ export class DataTableComponent<T> implements OnInit {
   }
 
   pageEvent(event) {
-    console.log(event);
+    this.config.page = event.pageIndex;
+    this.config.pageSize = event.pageSize;
+    this.dataTableEventChange.emit(this.config);
   }
 
   sortData(event: Sort) {
-    console.log(event);
+    this.config.sortKey = event.active;
+    this.config.sortOrder = event.direction === 'asc' ? 1 : -1;
+    this.dataTableEventChange.emit(this.config);
   }
 }

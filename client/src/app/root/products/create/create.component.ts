@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../service/product.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Product } from '../../../shared/model/data';
 import { CommonService } from '../../../shared/service/common.service';
 import { CartService } from '../../../shared/service/cart.service';
@@ -23,6 +23,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   loading: boolean;
   title: string = 'Create';
   productShotCode: string;
+  addAnother: FormControl;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -40,13 +41,13 @@ export class CreateComponent implements OnInit, OnDestroy {
       this.activeRoute.paramMap.subscribe(
         value => {
           this.productId = value.get('uid');
-          console.log(this.productId)
           if(this.productId) {
             this.loading = true;
             this.title = 'Update'
             this.getProduct()
           } else {
-            this.initForm(new Product())
+            this.addAnother = new FormControl();
+            this.initForm(new Product());
           }
         }
       )
@@ -75,7 +76,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       const originCode = origin ? origin.ShortCode : '';
       const cate = this.categories.find( f => f._id === val.Category);
       const cateCode = cate ? cate.ShortCode : '';
-      const proName = val.ProductName.split(' ');
+      const proName = val.ProductName ? val.ProductName.split(' ') : [];
       const shodeCode = proName.join('-').toLowerCase();
       this.productShotCode = [originCode, cateCode, shodeCode].join('-') ;
     });
@@ -108,7 +109,8 @@ export class CreateComponent implements OnInit, OnDestroy {
           this.commonService.openSnackBar(res.message);
           this.updateCart(productForm.value);
         } else {
-          this.router.navigate(['/products']);
+          if(this.addAnother.value) this.initForm(new Product())
+          else this.router.navigate(['/products']);
         }
       }
     ).catch(
@@ -124,8 +126,9 @@ export class CreateComponent implements OnInit, OnDestroy {
       const newPro = {...pro, ...data};
       if(newPro['cartQty'] >  newPro.Quantity) {
         newPro['cartQty'] = newPro.Quantity;
-        this.cartService.updateProductQtyToCart({ProductId: this.productId, Quantity: newPro.Quantity});
-      }
+        this.cartService.updateProductQtyToCart({ProductId: this.productId, Quantity: newPro['cartQty']});
+      } 
+      newPro.Quantity = newPro.Quantity - newPro['cartQty'];
       this.cartService.cartItemChange.emit(newPro);
     }
   }

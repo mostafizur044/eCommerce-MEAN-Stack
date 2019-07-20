@@ -4,6 +4,7 @@ import { ProductDetailsComponent } from './product-details.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ProductDetailsService } from './details.service';
+import {MatChipsModule} from '@angular/material/chips';
 
 const routes: Routes = [
   {path: '', component: ProductDetailsComponent}
@@ -16,6 +17,7 @@ const routes: Routes = [
     CommonModule,
     MatProgressBarModule,
     RouterModule.forChild(routes),
+    MatChipsModule
   ],
   providers: [ProductDetailsService]
 })

@@ -64,7 +64,6 @@ const getProduct = (req, res, next) => {
   .populate('Origin')
   .then(products => {
     Products.collection.countDocuments(filter).then(totalCount => {
-      // console.log(filter, totalCount)
       const data = {
         products,
         totalCount,
