@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const productRoute = require('./api/routes/products');
 const dictionaryRoute = require('./api/routes/dictionary');
 const cartRoute = require('./api/routes/carts');
+const url = require('url');
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useNewUrlParser', true);
@@ -25,6 +26,8 @@ app.use('/api/dictionary', dictionaryRoute);
 app.use('/api/cart', cartRoute);
 
 app.use('/', express.static(__dirname + '/dist/eCommerce'));
+
+app.use('*', express.static(__dirname + '/dist/eCommerce'));
 
 app.listen(PORT, () => {
     console.log(`Server listen from ${PORT}.....`);
