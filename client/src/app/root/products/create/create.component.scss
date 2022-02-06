@@ -15,7 +15,7 @@
 
         .submit-btn {
             margin-top: 20px;
-            background-color: #4169e1;
+            background-color: var(--add-cart-button-background);
             color: #ffffff;
         }
 
@@ -24,7 +24,7 @@
         }
         ::ng-deep {
             .mat-form-field-appearance-legacy.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label, .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-                color: #4169e1;
+                color: var(--add-cart-button-background);
             }
         }
     }
