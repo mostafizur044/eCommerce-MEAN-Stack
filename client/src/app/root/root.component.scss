@@ -4,12 +4,16 @@
         padding: 0 15px;
         color: #707070;
         &:hover {
-            color: #4169e1;
+            color: var(--add-cart-button-background);
         }
     }
     .active {
-        color: #4169e1;
+        color: var(--add-cart-button-background);
     }
+}
+
+.change-theme {
+    
 }
 
 .router-change-progress-bar {

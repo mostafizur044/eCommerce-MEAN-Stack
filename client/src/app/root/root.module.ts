@@ -4,6 +4,9 @@ import { RootComponent } from './root.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CartPanelComponent } from './cart-panel/cart-panel.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatMenuModule} from '@angular/material/menu';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatButtonModule } from '@angular/material/button';
 
 
 const routes: Routes = [
@@ -21,7 +24,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MatProgressBarModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatMenuModule,
+    OverlayModule,
+    MatButtonModule
   ]
 })
 export class RootModule { }

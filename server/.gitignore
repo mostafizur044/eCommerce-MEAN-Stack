@@ -2,6 +2,7 @@
 
 # compiled output
 .env
+.vs*
 /tmp
 /out-tsc
 # Only exists if Bazel was run

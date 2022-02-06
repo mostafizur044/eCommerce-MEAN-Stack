@@ -11,6 +11,13 @@
       <a [routerLink]="['/products']" routerLinkActive="active">Products</a>
       <a [routerLink]="['/my-cart']" routerLinkActive="active">My Cart</a>
     </div>
+    <div class="change-theme">
+      <button mat-button [matMenuTriggerFor]="menu">Theme</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let t of themes" (click)="changeTheme(t)">{{t.name}}</button>
+        <button mat-menu-item *ngFor="let m of materialThemes" (click)="onSetTheme(m.id)">{{m.name}}</button>   
+      </mat-menu>
+    </div>
     <app-cart-panel></app-cart-panel>
   </nav>
 </header>

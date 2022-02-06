@@ -2,7 +2,7 @@
   margin: 0;
   padding: 15px 10px;
   background: #ffffff;
-  color: #4169e1;
+  color: var(--add-cart-button-background);
   border-radius: 2px;
   border-bottom: 1px solid #efefef;
   font-weight: 400;
@@ -76,7 +76,7 @@
   margin: 0;
   padding: 15px 10px;
   background: #ffffff;
-  color: #4169e1;
+  color: var(--add-cart-button-background);
   border-radius: 2px;
   border-top: 1px solid #efefef;
   font-weight: 400;

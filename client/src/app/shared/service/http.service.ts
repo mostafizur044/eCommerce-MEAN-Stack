@@ -13,15 +13,15 @@ export class HttpService {
     private http: HttpClient
   ) { }
 
-  get(url, option?) {
+  get(url: string, option?) {
     return this.http.get(this.endPoint + url, option);
   }
 
-  post(url, body, option?) {
+  post(url: string, body: {}, option?) {
     return this.http.post(this.endPoint + url, body, option);
   }
 
-  delete(url, option?) {
+  delete(url:string, option?) {
     return this.http.delete(this.endPoint + url, option);
   }
 }
