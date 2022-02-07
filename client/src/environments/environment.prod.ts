@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiEndPoint: 'https://mostafiz-mean-example.herokuapp.com/api/'
+  apiEndPoint: 'http://localhost:3000/api/'
 };
