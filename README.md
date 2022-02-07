@@ -13,3 +13,6 @@ Hit `localhost:3000`
 Technology: javascript, Angular 13
 
 To run client please run `ng serve`
+
+## Demo
+https://mean-stack-example.netlify.app/
