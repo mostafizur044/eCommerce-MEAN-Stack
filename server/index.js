@@ -28,8 +28,6 @@ if(NODE_ENV !== 'development' || (MONGO_USER !== '' && MONGO_PASS !== '')) {
                 : `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_IP}/${MONGO_DB}?retryWrites=true&w=majority`
 }
 
-console.log(HAS_SRV, mongoUrl);
-
 mongoose.connect(mongoUrl)
 .then(() => {
     console.log("Connected to Database");
